@@ -1,0 +1,4 @@
+myApp/apiKey.py
+myApp/myApp/__pycache__/
+myApp/weather/__pycache__/
+myApp/weather/migrations/
