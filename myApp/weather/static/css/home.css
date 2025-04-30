@@ -7,6 +7,7 @@ body{
 }
 .cityContainer{
     display: flex;
+    align-items: center;
     padding: 50px;
     margin: 50px;
     width: 50%;
@@ -17,4 +18,19 @@ body{
     border-radius:50px;
     -moz-border-radius:50px;
     -webkit-border-radius:50px;
+    font-size: 40px;
+}
+.textContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.weatherImage{
+    padding: 0px;
+    transform: translateY(-5%);
+}
+.myText{
+    display: absolute;
+    margin-top:10px;
+    margin-bottom: 10px;
 }
