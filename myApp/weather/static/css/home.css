@@ -4,3 +4,14 @@ body{
     background: linear-gradient(0deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(255, 247, 247, 1) 100%);
     background-attachment: fixed;
 }
+.cityContainer{
+    display: flex;
+    width: 50%;
+    height: 100vh;
+    z-index: 1;
+    background:rgb(240,248,255,0.5);
+    color: black;
+    border-radius:50px;
+    -moz-border-radius:50px;
+    -webkit-border-radius:50px;
+}
