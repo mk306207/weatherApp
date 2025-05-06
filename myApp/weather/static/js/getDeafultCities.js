@@ -8,31 +8,32 @@ async function loadTemperature(){
     data.forEach(City => {
         const id = City.location.name;
         const container = document.getElementById(id);
+        const temperatureContainer = document.createElement('div');
+        const windContainer = document.createElement('div');
         const img = document.createElement('img');
-        const textContainer = document.createElement('div');
-        textContainer.setAttribute('class','textContainer');
-        const imgContainer = document.createElement('div');
-        imgContainer.setAttribute('class','imageContainer');
+        temperatureContainer.setAttribute('class','temperatureContainer');
+        windContainer.setAttribute('class','windContainer');
 
         img.style.width = '128px';
         img.style.height = '128px';
         img.src = City.current.condition.icon;
         img.setAttribute('class','weatherImage');
-        
-        const temp = document.createElement('P');
-        temp.setAttribute('class','myText');
+
         const valueOfTemperature = document.createTextNode(City.current.temp_c + " °C");
-        temp.appendChild(valueOfTemperature);
+        temperatureContainer.appendChild(valueOfTemperature);
+        temperatureContainer.appendChild(img);
 
-        const wind = document.createElement('P');
-        wind.setAttribute('class','myText');
+        const imgW = document.createElement('img');
+        imgW.style.width = '100px';
+        imgW.style.height = '100px';
+        imgW.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXdpbmQtaWNvbiBsdWNpZGUtd2luZCI+PHBhdGggZD0iTTEyLjggMTkuNkEyIDIgMCAxIDAgMTQgMTZIMiIvPjxwYXRoIGQ9Ik0xNy41IDhhMi41IDIuNSAwIDEgMSAyIDRIMiIvPjxwYXRoIGQ9Ik05LjggNC40QTIgMiAwIDEgMSAxMSA4SDIiLz48L3N2Zz4=';
+        imgW.setAttribute('class','weatherImage');
+
         const valueOfWindSpeed = document.createTextNode(City.current.wind_kph + " km/h");
-        wind.appendChild(valueOfWindSpeed);
+        windContainer.appendChild(valueOfWindSpeed);
+        windContainer.appendChild(imgW);
 
-        textContainer.appendChild(temp);
-        textContainer.appendChild(wind);
-
-        container.appendChild(img);
-        container.appendChild(textContainer);
+        container.appendChild(temperatureContainer);
+        container.appendChild(windContainer);
     });
 }

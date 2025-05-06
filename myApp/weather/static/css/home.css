@@ -7,7 +7,8 @@ body{
 }
 .cityContainer{
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
     padding: 50px;
     margin: 50px;
     width: 50%;
@@ -22,8 +23,11 @@ body{
 }
 .textContainer{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    position:relative;
     flex-direction: column;
+    transform: translateY(5%);
+    left: 0%;
 }
 .weatherImage{
     padding: 0px;
@@ -33,4 +37,10 @@ body{
     display: absolute;
     margin-top:10px;
     margin-bottom: 10px;
+}
+.temperatureContainer, .windContainer {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:10px;
 }
