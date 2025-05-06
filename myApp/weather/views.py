@@ -7,6 +7,9 @@ from django.http import JsonResponse
 def home(request):
     return render(request, 'home.html')
 
+def searchCity(request):
+    return render(request,'searchCity.html')
+
 def realtime_weather(request):
     locations = []
     #Gliwice

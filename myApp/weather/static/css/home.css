@@ -4,6 +4,23 @@ body{
     background: #2A7B9B;
     background: linear-gradient(0deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(255, 247, 247, 1) 100%);
     background-attachment: fixed;
+    padding-top: 50px;
+}
+.myButton{
+    position:absolute;
+    top: 5px;
+    right: 44%;
+	background-color:rgb(91, 158, 87);
+	border-radius:28px;
+	border:1px solid #0000;
+	display:inline-block;
+	color:#ffffff;
+	font-size:20px;
+	padding:11px 21px;
+	text-decoration:none;
+}
+.myButton:hover{
+    background-color:rgb(69, 87, 68);
 }
 .cityContainer{
     display: flex;
@@ -12,8 +29,7 @@ body{
     padding: 50px;
     margin: 50px;
     width: 50%;
-    height: 80vh;
-    z-index: 1;
+    height: 70vh;
     background:rgb(240,248,255,0.5);
     color: black;
     border-radius:50px;
