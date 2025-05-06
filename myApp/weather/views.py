@@ -19,4 +19,44 @@ def realtime_weather(request):
     response = requests.get(apiURL)
     locations.append(response.json())
     
-    print(locations);return JsonResponse(locations,safe=False)
+    return JsonResponse(locations,safe=False)
+
+def forecast_weather(request):
+    data = []
+    #Gliwice
+    apiURL = f'http://api.weatherapi.com/v1/forecast.json?key={apiKey}&q=Gliwice&days=7&aqi=no&alerts=no'
+    response = requests.get(apiURL)
+    response = response.json()
+    cleaned_data = {
+    "location":response["location"]["name"],
+    "forecast":[
+        {
+            "date":day["date"],
+            "temp":day["day"]["avgtemp_c"],
+            "windMAX":day["day"]["maxwind_kph"],
+            "weatherIcon":day["day"]["condition"]["icon"]
+        }
+        for day in response["forecast"]["forecastday"]
+    ]
+    }
+    data.append(cleaned_data)
+    
+    #Hamburg
+    apiURL = f'http://api.weatherapi.com/v1/forecast.json?key={apiKey}&q=Hamburg&days=7&aqi=no&alerts=no'
+    response = requests.get(apiURL)
+    response = response.json()
+    cleaned_data = {
+    "location":response["location"]["name"],
+    "forecast":[
+        {
+            "date":day["date"],
+            "temp":day["day"]["avgtemp_c"],
+            "windMAX":day["day"]["maxwind_kph"],
+            "weatherIcon":day["day"]["condition"]["icon"]
+        }
+        for day in response["forecast"]["forecastday"]
+    ]
+    }
+    data.append(cleaned_data)
+
+    return JsonResponse(data,safe=False)

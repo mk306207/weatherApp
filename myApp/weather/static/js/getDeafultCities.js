@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadTemperature(){
     const response = await fetch('/realtime-weather');
+    const response1 = await fetch('/forecast-weather');
     const data = await response.json();
     data.forEach(City => {
         const id = City.location.name;
