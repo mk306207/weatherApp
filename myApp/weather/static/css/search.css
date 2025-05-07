@@ -8,6 +8,7 @@ body {
     padding-top: 50px;
     background: linear-gradient(0deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(255, 247, 247, 1) 100%);
     background-attachment: fixed;
+    flex-direction: column;
 }
 .form{
     display: flex;
@@ -48,4 +49,9 @@ body {
 .searchButton:hover {
     border:7px solid #026b56;
 	background-color:#026b56;
+}
+.messages{
+    background-color: rgba(182, 1, 1, 0.75);
+    padding: 10px;
+    border-radius:28px;
 }

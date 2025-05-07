@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from apiKey import apiKey
 import requests
 from django.http import JsonResponse
@@ -7,7 +8,24 @@ from django.http import JsonResponse
 def home(request):
     return render(request, 'home.html')
 
+def requestCity(city,request):
+    apiURL = f'http://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={city}&days=7&aqi=no&alerts=no'
+    response = requests.get(apiURL)
+    response = response.json()
+    if "error" in response:
+        messages.add_message(request, messages.ERROR, "Invalid city name")
+        print("Invalid city name")
+    else:
+        print(response["location"]["name"])
+
 def searchCity(request):
+    if request.method == 'POST':
+        city = request.POST.get("searchedCity")
+        if city == "":
+            pass
+        else:
+            requestCity(city,request)
+            return redirect('searchCity')
     return render(request,'searchCity.html')
 
 def realtime_weather(request):

@@ -15,4 +15,11 @@
         </label>
         <button type="submit" name="button" class="searchButton" value="search">Search!</button>
     </form>
+    {% if messages %}
+            {% for message in messages %}
+            <div class="messages">
+                {{ message }}
+            </div>
+            {% endfor %}
+    {% endif %}
 </body>
