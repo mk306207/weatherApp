@@ -6,4 +6,5 @@ urlpatterns = [
     path("searchCity",views.searchCity,name="searchCity"),
     path("realtime-weather",views.realtime_weather,name="realtime_weather"),
     path("forecast-weather",views.forecast_weather,name="forecast_weather"),
+    path('searchCity/<str:city>',views.singleCity,name="singleCity"),
 ]

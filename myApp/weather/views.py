@@ -3,10 +3,28 @@ from django.contrib import messages
 from apiKey import apiKey
 import requests
 from django.http import JsonResponse
+from django.urls import reverse
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
+
+def cleanJsonData(URL):
+    response = requests.get(URL)
+    response = response.json()
+    cleaned_data = {
+    "location":response["location"]["name"],
+    "forecast":[
+        {
+            "date":day["date"][5:],
+            "temp":day["day"]["avgtemp_c"],
+            "windMAX":day["day"]["maxwind_kph"],
+            "weatherIcon":day["day"]["condition"]["icon"]
+        }
+        for day in response["forecast"]["forecastday"]
+    ]
+    }
+    return cleaned_data
 
 def requestCity(city,request):
     apiURL = f'http://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={city}&days=7&aqi=no&alerts=no'
@@ -15,8 +33,10 @@ def requestCity(city,request):
     if "error" in response:
         messages.add_message(request, messages.ERROR, "Invalid city name")
         print("Invalid city name")
+        return None
     else:
         print(response["location"]["name"])
+        return response
 
 def searchCity(request):
     if request.method == 'POST':
@@ -24,8 +44,12 @@ def searchCity(request):
         if city == "":
             pass
         else:
-            requestCity(city,request)
-            return redirect('searchCity')
+            data = requestCity(city,request)
+            if data:
+                return redirect(reverse('singleCity', args=[city]))
+            else:
+                messages.add_message(request, messages.ERROR, "Invalid city name")
+                return redirect('searchCity')
     return render(request,'searchCity.html')
 
 def realtime_weather(request):
@@ -46,39 +70,21 @@ def forecast_weather(request):
     data = []
     #Gliwice
     apiURL = f'http://api.weatherapi.com/v1/forecast.json?key={apiKey}&q=Gliwice&days=7&aqi=no&alerts=no'
-    response = requests.get(apiURL)
-    response = response.json()
-    cleaned_data = {
-    "location":response["location"]["name"],
-    "forecast":[
-        {
-            "date":day["date"][5:],
-            "temp":day["day"]["avgtemp_c"],
-            "windMAX":day["day"]["maxwind_kph"],
-            "weatherIcon":day["day"]["condition"]["icon"]
-        }
-        for day in response["forecast"]["forecastday"]
-    ]
-    }
-    print(cleaned_data)
-    data.append(cleaned_data)
+    cleanedData = cleanJsonData(apiURL)
+    print(cleanedData)
+    data.append(cleanedData)
     
     #Hamburg
     apiURL = f'http://api.weatherapi.com/v1/forecast.json?key={apiKey}&q=Hamburg&days=7&aqi=no&alerts=no'
+    cleanedData = cleanJsonData(apiURL)
+    print(cleanedData)
+    data.append(cleanedData)
+    return JsonResponse(data,safe=False)
+
+def singleCity(request,city):
+    apiURL = f'http://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={city}&days=7&aqi=no&alerts=no'
+    cleanedData = cleanJsonData(apiURL)
+    apiURL = f'http://api.weatherapi.com/v1/current.json?key={apiKey}&q={city}&aqi=no'
     response = requests.get(apiURL)
     response = response.json()
-    cleaned_data = {
-    "location":response["location"]["name"],
-    "forecast":[
-        {
-            "date":day["date"][5:],
-            "temp":day["day"]["avgtemp_c"],
-            "windMAX":day["day"]["maxwind_kph"],
-            "weatherIcon":day["day"]["condition"]["icon"]
-        }
-        for day in response["forecast"]["forecastday"]
-    ]
-    }
-    data.append(cleaned_data)
-
-    return JsonResponse(data,safe=False)
+    return render(request,"singleCity.html",{"data":cleanedData, "current":response})
