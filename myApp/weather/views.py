@@ -52,7 +52,7 @@ def forecast_weather(request):
     "location":response["location"]["name"],
     "forecast":[
         {
-            "date":day["date"],
+            "date":day["date"][5:],
             "temp":day["day"]["avgtemp_c"],
             "windMAX":day["day"]["maxwind_kph"],
             "weatherIcon":day["day"]["condition"]["icon"]
@@ -60,6 +60,7 @@ def forecast_weather(request):
         for day in response["forecast"]["forecastday"]
     ]
     }
+    print(cleaned_data)
     data.append(cleaned_data)
     
     #Hamburg
@@ -70,7 +71,7 @@ def forecast_weather(request):
     "location":response["location"]["name"],
     "forecast":[
         {
-            "date":day["date"],
+            "date":day["date"][5:],
             "temp":day["day"]["avgtemp_c"],
             "windMAX":day["day"]["maxwind_kph"],
             "weatherIcon":day["day"]["condition"]["icon"]
