@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+</head>
+<body>
+    <form class="form" method='POST'>
+        {% csrf_token %}
+        <label class="label">
+            <input class="input" type="text" name="searchedCity" spellcheck="false" placeholder="Which city you want to check...">
+        </label>
+        <button type="submit" name="button" class="searchButton" value="search">Search!</button>
+    </form>
+</body>
