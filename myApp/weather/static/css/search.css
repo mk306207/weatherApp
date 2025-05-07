@@ -51,7 +51,25 @@ body {
 	background-color:#026b56;
 }
 .messages{
-    background-color: rgba(182, 1, 1, 0.75);
-    padding: 10px;
-    border-radius:28px;
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background-color:rgba(182,1,1,0.75);
+    padding:12px 24px;
+    border-radius: 28px;
+    color:white;
+    font-family: 'Lexend', sans-serif;
+    z-index: 9999;
+    opacity:0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+.messages.show{
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.messages.hide{
+    opacity:0;
+    transform: translateX(-50%) translateY(-10px);
 }
