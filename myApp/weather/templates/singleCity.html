@@ -6,14 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Lexend' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/backButton.css' %}">
+    <script src="https://kit.fontawesome.com/6ca08112e0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
-    <div class = "cityContainer" id="cityCont">
+    <a class="fa-solid fa-2xl fa-arrow-left backButton" href = "{% url 'searchCity' %}"></a>
+    <div class = "singleCityContainer" id="cityCont">
         {{data.location}}
         <div class="temperatureContainer">
             {{current.current.temp_c}} °C
             <img src="{{current.current.condition.icon}}" class="weatherImage" style="width: 128px;height:128px;">
+        </div>
+        <div class="windContainer">
+            {{current.current.wind_kph}} kph
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXdpbmQtaWNvbiBsdWNpZGUtd2luZCI+PHBhdGggZD0iTTEyLjggMTkuNkEyIDIgMCAxIDAgMTQgMTZIMiIvPjxwYXRoIGQ9Ik0xNy41IDhhMi41IDIuNSAwIDEgMSAyIDRIMiIvPjxwYXRoIGQ9Ik05LjggNC40QTIgMiAwIDEgMSAxMSA4SDIiLz48L3N2Zz4="class="weatherImage" style="width: 100px;height:100px;">
+        </div>
+        <div class="forecastContainer">
+            {% for day in data.forecast  %}
+                <div class="col">
+                    <div class="dateDiv">
+                        {{day.date}}
+                    </div>
+                    <div>
+                        {{day.temp}}°C
+                    </div>
+                    <div>
+                        {{day.windMAX}}kph
+                    </div>
+                    <div>
+                        <img src="{{day.weatherIcon}}" style="width: 50px;height:50px;">
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 

@@ -78,3 +78,20 @@ body{
 .dateDiv{
     padding-bottom:8px;
 }
+.singleCityContainer{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 50px;
+    margin: 50px;
+    margin-top: 100px;
+    width: 50%;
+    height: 50vh;
+    background:rgb(240,248,255,0.5);
+    color: black;
+    border-radius:50px;
+    -moz-border-radius:50px;
+    -webkit-border-radius:50px;
+    font-size: 40px;
+    transform:translateX(35%)
+}

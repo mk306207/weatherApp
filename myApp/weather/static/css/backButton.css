@@ -1,0 +1,12 @@
+.backButton{
+    position: absolute;
+    top: 22px;
+    left: 10px;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+.backButton:hover{
+    color: grey;
+    text-decoration: none;
+}
