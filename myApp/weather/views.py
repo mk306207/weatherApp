@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from apiKey import apiKey
 import requests
 from django.http import JsonResponse
 from django.urls import reverse
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+apiKey = os.getenv("apiKey")
+print(apiKey)
 # Create your views here.
 def home(request):
     return render(request, 'home.html')

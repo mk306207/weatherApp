@@ -1,6 +1,6 @@
 # Weather app - Mateusz Kolber  
 ## Before you start  
-There is an additional file called apiKey.py where I store my API key from www.weatherapi.com. Please remember that, if you won't put there your API key the application won't work!  
+I store an apiKey in my .env file as "apiKey" from weatherapi.com  
 ## Functions  
 ### home(request)  
 Starting functions, renders home.html.  

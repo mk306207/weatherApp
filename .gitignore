@@ -4,3 +4,4 @@ myApp/weather/__pycache__/
 myApp/weather/migrations/
 myApp/__pycache__/
 .DS_Store
+.env
